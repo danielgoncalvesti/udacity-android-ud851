@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int NUM_LIST_ITEMS = 100;
 
     // COMPLETED (2) Create a GreenAdapter variable called mAdapter
-    GreenAdapter mAdapter;
+    private GreenAdapter mAdapter;
 
     // COMPLETED (3) Create a RecyclerView variable called mNumbersList
-    RecyclerView mNumberList;
-    
+    private RecyclerView mNumberList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
