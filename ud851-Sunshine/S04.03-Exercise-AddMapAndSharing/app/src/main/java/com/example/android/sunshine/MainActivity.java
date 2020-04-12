@@ -36,6 +36,7 @@ import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
+import java.net.URI;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
@@ -222,7 +223,30 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         }
 
         // TODO (2) Launch the map when the map menu item is clicked
+        if(id == R.id.action_map){
+            openLocationMap();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openLocationMap() {
+        String locationString = "Mountain View";
+        //create a uri location
+        Uri.Builder uriBuilder = new Uri.Builder().scheme("geo")
+                                        .path("0,0")
+                                        .appendQueryParameter("q", locationString);
+        Uri uriLocation = uriBuilder.build();
+
+        Intent intentLocationMap = new Intent(Intent.ACTION_VIEW);
+        intentLocationMap.setData(uriLocation);
+
+        if (intentLocationMap.resolveActivity(getPackageManager()) != null){
+            startActivity(intentLocationMap);
+        } else {
+            Log.d(TAG, "Couldn't call " + uriLocation.toString()
+                    + ", no receiving apps installed!");
+        }
     }
 }
